@@ -40,10 +40,23 @@
         </repository>
     </repositories>
 
+    
+
+
     <!-- ================================================================================ -->
-    <!-- Dependencies -->
+    <!-- PLUGINS -->
     <!-- ================================================================================ -->
-    <dependencies>
+
+
+<profiles>
+
+<profile>
+			<id>java</id>
+			<properties>
+				<ci.build.sourceDirectory>src/main/java</ci.build.sourceDirectory>
+				<ci.build.testSourceDirectory>src/test/java</ci.build.testSourceDirectory>
+			</properties>
+			    <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -80,12 +93,7 @@
             <version>${version.jackson}</version>
         </dependency>
     </dependencies>
-
-    <!-- ================================================================================ -->
-    <!-- PLUGINS -->
-    <!-- ================================================================================ -->
-
-    <build>
+			 <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -98,4 +106,68 @@
             </plugin>
         </plugins>
     </build>
+	</profile>		
+			
+		<profile>
+			<id>js</id>
+			<properties>
+				<ci.build.sourceDirectory>src/main/webapp</ci.build.sourceDirectory>
+				<ci.build.testSourceDirectory>src/main/test</ci.build.testSourceDirectory>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.kelveden</groupId>
+						<artifactId>maven-karma-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>coverage</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>start</goal>
+								</goals>
+								<configuration>
+									<configFile>${basedir}/src/main/config/karma.conf.js</configFile>
+									<karmaFailureIgnore>true</karmaFailureIgnore>
+									<colors>false</colors>
+									<autoWatch>false</autoWatch>
+									<reporters>dots,junit,coverage</reporters>
+									<browsers>PhantomJS</browsers>
+									<logLevel>config.LOG_DEBUG</logLevel>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<executions>
+							<execution>
+								<id>copy-lcov-file-to-target</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<skip>${skipTests}</skip>
+									<target>
+										<!-- copy the "lcov.info" file to the "target" directory (from 
+											"target/karma-coverage/PhantomJS*/") -->
+										<copy todir="target" flatten="true">
+											<fileset dir="target">
+												<include name="karma-coverage/PhantomJS*/lcov.info" />
+											</fileset>
+										</copy>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+</profiles>
+
 </project>
