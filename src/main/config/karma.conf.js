@@ -1,16 +1,14 @@
 module.exports = function(config) {
   config.set({
 basePath : '../',
-files : [ '**/webapp/lib/angular/angular.js',
-          '**/webapp/lib/angular/angular-*.js',
-          '**/webapp/lib/restangular/*.js',
+files : [ '**/lib/angular/*.js',
           '**/test/lib/angular/angular-mocks.js', 
-          '**/webapp/js/*.js',
+          '**/webapp/js/app/*.js',
           '**/test/unit/*.js' ],
 
 preprocessors :
 {
-//  '**/webapp/js/*.js': 'coverage'
+  '/webapp/js/app/*.js': 'coverage'
 },
 
 frameworks : ['jasmine'],
