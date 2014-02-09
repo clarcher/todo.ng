@@ -55,45 +55,41 @@
 
 <profile>
 			<id>java</id>
-			<properties>
-				<ci.build.sourceDirectory>src/main/java</ci.build.sourceDirectory>
-				<ci.build.testSourceDirectory>src/test/java</ci.build.testSourceDirectory>
-			</properties>
 			    <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>${version.spring}</version>
+            <version>3.1.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>${version.spring}</version>
+            <version>3.1.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${version.spring}</version>
+            <version>3.1.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${version.spring}</version>
+            <version>3.1.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${version.spring}</version>
+            <version>3.1.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
-            <version>${version.jackson}</version>
+            <version>1.9.2</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>${version.jackson}</version>
+            <version>1.9.2}</version>
         </dependency>
     </dependencies>
 			 <build>
@@ -102,10 +98,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
-                <configuration>
-                    <source>${project.build.javaVersion}</source>
-                    <target>${project.build.javaVersion}</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>
